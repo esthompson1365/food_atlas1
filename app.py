@@ -60,7 +60,8 @@ def getData():
     conn = engine.connect()
     try:
         data = pd.read_sql("SELECT * FROM \"FIPS\" ", conn)
-        return data.to_json(orient='records')
+        combinedData = counties.merge(data, on='FIPS')
+        return combinedData.to_json()
     except Exception as e:
         print(e)
         return render_template('error.html', error=True)
@@ -98,7 +99,8 @@ def assistance():
     conn = engine.connect()
     try:
         data = pd.read_sql("SELECT * FROM \"Assistance\" ", conn)
-        return data.to_json(orient='records')
+        combinedData = counties.merge(data, on='FIPS')
+        return combinedData.to_json()
     except Exception as e:
         print(e)
         return render_template('error.html', error=True)
@@ -110,7 +112,8 @@ def health():
     conn = engine.connect()
     try:
         data = pd.read_sql("SELECT * FROM \"Health\" ", conn)
-        return data.to_json(orient='records')
+        combinedData = counties.merge(data, on='FIPS')
+        return combinedData.to_json()
     except Exception as e:
         print(e)
         return render_template('error.html', error=True)
@@ -122,7 +125,8 @@ def insecurity():
     conn = engine.connect()
     try:
         data = pd.read_sql("SELECT * FROM \"Insecurity\" ", conn)
-        return data.to_json(orient='records')
+        combinedData = counties.merge(data, on='FIPS')
+        return combinedData.to_json()
     except Exception as e:
         print(e)
         return render_template('error.html', error=True)
@@ -134,19 +138,21 @@ def local():
     conn = engine.connect()
     try:
         data = pd.read_sql("SELECT * FROM \"Local\" ", conn)
-        return data.to_json(orient='records')
+        combinedData = counties.merge(data, on='FIPS')
+        return combinedData.to_json()
     except Exception as e:
         print(e)
         return render_template('error.html', error=True)
 
 
-@app.route('/api/data/prices')
+@app.route('/api/data/PRICES_TAXES')
 def prices():
     # Establish DB connection
     conn = engine.connect()
     try:
         data = pd.read_sql("SELECT * FROM \"PRICES_TAXES\" ", conn)
-        return data.to_json(orient='records')
+        combinedData = counties.merge(data, on='FIPS')
+        return combinedData.to_json()
     except Exception as e:
         print(e)
         return render_template('error.html', error=True)
@@ -170,7 +176,8 @@ def county():
     conn = engine.connect()
     try:
         data = pd.read_sql("SELECT * FROM \"county\" ", conn)
-        return data.to_json(orient='records')
+        combinedData = counties.merge(data, on='FIPS')
+        return combinedData.to_json()
     except Exception as e:
         print(e)
         return render_template('error.html', error=True)
@@ -182,7 +189,8 @@ def restaurants():
     conn = engine.connect()
     try:
         data = pd.read_sql("SELECT * FROM \"restaurants\" ", conn)
-        return data.to_json(orient='records')
+        combinedData = counties.merge(data, on='FIPS')
+        return combinedData.to_json()
     except Exception as e:
         print(e)
         return render_template('error.html', error=True)
