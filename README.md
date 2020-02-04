@@ -1,2 +1,2 @@
 # food_atlas
-project2
+repo for project 2
